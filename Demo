@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Buttons</title>
+    <style>
+        .custom-button {
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <button id="resetSSOButton" class="custom-button">Reset My SSO</button>
+    <button id="submitITRequestButton" class="custom-button">Submit an IT Request</button>
+
+    <script type="text/javascript">
+        // JavaScript for the "Reset My SSO" button
+        document.getElementById('resetSSOButton').addEventListener('click', function () {
+            jQuery.ajax({
+                url: "https://daniel-jsm-demo.atlassian.net/s/d41d8cd98f00b204e9800998ecf8427e-T/g2slup/b/0/b0105d975e9e59f24a3230a22972a71a/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs.js?locale=en-US&collectorId=55b8e718",
+                type: "get",
+                cache: true,
+                dataType: "script"
+            });
+
+            window.ATL_JQ_PAGE_PROPS = {
+                "triggerFunction": function(showCollectorDialog) {
+                    jQuery("#resetSSOButton").click(function(e) {
+                        e.preventDefault();
+                        showCollectorDialog();
+                    });
+                }
+            };
+        });
+
+        // JavaScript for the "Submit an IT Request" button
+        document.getElementById('submitITRequestButton').addEventListener('click', function () {
+            window.location.href = 'https://daniel-jsm-demo.atlassian.net/servicedesk/customer/portal/1';
+        });
+    </script>
+</body>
+</html>
